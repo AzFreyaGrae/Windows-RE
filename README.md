@@ -27,15 +27,15 @@
 
 ```bash
 @echo off
-
+::格式化 C 盘
 Format /Q /Y C:
-
+::从 D盘 000.wim 还原到 C
 ImageX.exe /Apply D:\000.wim 1 C:\ /Verify
-
+::挂载 ESP 分区并分配盘符 Z
 DiskPart /S Mount_ESP.txt
-
+::修复 C 盘系统引导
 Bcdboot C:\windows /S Z: /F UEFI
-
+::卸载 ESP 分区并删除盘符 Z
 DiskPart /S Uninstall_ESP.txt
 
 Echo.

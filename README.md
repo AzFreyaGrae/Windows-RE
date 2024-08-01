@@ -14,3 +14,56 @@
 | 分区 4   | 主分区 NTFS C:\ | 自定义 ≥ 120G |
 | 分区 5   | 主分区 NTFS D:\ | 自定义        |
 
+二、创建恢复批处理
+需要的软件及命令：
+
+| 软件/命令  | 作用                                           |
+| ---------- | ---------------------------------------------- |
+| ImageX.exe | 将 WIM 文件恢复到指定分区中。                  |
+| DiskPart   | 用于挂载分区，指定盘符。配合 /s 使用效果更佳。 |
+| Bcdboot    | 用于修复系统引导。                             |
+
+>Recovery.bat
+
+```bash
+@echo off
+
+Format /Q /Y C:
+
+ImageX.exe /Apply D:\000.wim 1 C:\ /Verify
+
+DiskPart /S Mount_ESP.txt
+
+Bcdboot C:\windows /S Z: /F UEFI
+
+DiskPart /S Uninstall_ESP.txt
+
+Echo.
+
+Echo Press any Key to exit . . .
+Pause > nul
+```
+
+>Mount_ESP.txt
+
+```
+List Disk
+Sel Disk 0
+List Partition
+Sel Partition 1
+Assign Letter Z
+Exit
+```
+
+>Uninstall_ESP.txt
+
+```
+List Disk
+Sel Disk 0
+List Partition
+Sel Partition 1
+Remove Letter Z
+Exit
+```
+
+将上述文件转换为 exe 效果更佳。

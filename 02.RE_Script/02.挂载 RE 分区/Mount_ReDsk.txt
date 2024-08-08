@@ -1,0 +1,6 @@
+List Disk
+Sel Disk 0
+List Partition
+Sel Partition 3
+Assign Letter O
+Exit

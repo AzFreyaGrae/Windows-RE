@@ -1,6 +1,6 @@
 Lis Dis
 Sel Dis 0
-lis Par 0
+lis Par
 Sel Par 1
 delete partition override
 Sel Par 2

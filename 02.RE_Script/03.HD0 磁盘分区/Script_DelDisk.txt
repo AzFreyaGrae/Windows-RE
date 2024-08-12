@@ -1,0 +1,15 @@
+Lis Dis
+Sel Dis 0
+lis Par 0
+Sel Par 1
+delete partition override
+Sel Par 2
+delete partition override
+Sel Par 3
+delete partition override
+Sel Par 4
+delete partition override
+Sel Par 5
+delete partition override
+Sel Dis 0
+Convert GPT

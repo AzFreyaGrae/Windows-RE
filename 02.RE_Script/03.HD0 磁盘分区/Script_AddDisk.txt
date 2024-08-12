@@ -1,0 +1,17 @@
+Lis Dis
+Sel Dis 0
+Create partition efi size=500
+Format Fs=Fat32 Label="ESP" Quick
+Ass Letter Z
+Create Partition MSR Size=16
+Create Partition Primary Size=10701
+Format Fs=ntfs Label="OEM Recovery" Quick
+Set ID=de94bba4-06d1-4d40-a16a-bfd50179d6ac
+Ass Letter O
+attributes volume set hidden
+Create Partition Primary Size=123341
+Format Fs=ntfs Label="Windows_OS" Quick
+Ass Letter C
+Create Partition Primary Size=353826
+format fs=ntfs label="Data" Quick
+Ass Letter D

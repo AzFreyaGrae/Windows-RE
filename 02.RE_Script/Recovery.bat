@@ -1,6 +1,6 @@
 @Echo Off
 
-Format /Q /Y C:
+Format /Q /Y /V:Windows_OS C:
 
 ImageX.exe /Apply O:\RE_Image\xxxxx.wim 1 C:\ /Verify
 

@@ -8,7 +8,7 @@ pecmd.exe base [Password]
 ```
 2.打开 PeCmd.ini文件，2 次机会，输错关机
 ```
-SHEL %WinDir%\Explorer.exe,##QC9ucGjsilSvnPfNaU8tscntufW9=, 2
+SHEL %WinDir%\Explorer.exe,[生成的密码], 2
 ```
 3.加密 PeCmd.ini文件[Key_PeCmd.ini]为加密后文件
 ```

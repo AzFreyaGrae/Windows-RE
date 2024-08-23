@@ -1,76 +1,77 @@
+
 @Echo off
 Setlocal enabledelayedexpansion
-
-dir "D:\" > nul 2>&1
-if %errorlevel% equ 1 (
-	Goto  :Not_D
-) else (
+rd /s /q D:\BackupData
+MD D:\BackupData
+if %errorlevel% == 0 (
 	Goto :Script_Run
+) else (
+	Goto :Not_D 
 )
 
 :Script_Run
 For /D %%i in ("C:\Users\*") do (
 	Set folder_name=%%~ni
-	Echo ÓÃ»§Ãû£º !folder_name!)
+	Echo ç”¨æˆ·åï¼š !folder_name!)
 	Echo.
 :End
 
-Set /P "UserNa=ÇëÊäÈëÓÃ»§Ãû£º"
+Set /P "UserNa=è¯·è¾“å…¥ç”¨æˆ·åï¼š"
 
-Dir /D /-C D:\ | Find "Ä¿Â¼" > D_DirInfo.AeBak
-Dir /S /-C "C:\Users\%UserNa%\Desktop\" | Find "ÎÄ¼þ">C_Desktop.AeBak
-Dir /S /-C "C:\Users\%UserNa%\Documents\" | Find "ÎÄ¼þ">C_Documents.AeBak
-Dir /S /-C "C:\Users\%UserNa%\Downloads\" | Find "ÎÄ¼þ">C_Downloads.AeBak
+Dir /D /-C D:\ | Find "ç›®å½•" > D_DirInfo.AeBak
+Dir /S /-C "C:\Users\%UserNa%\Desktop\" | Find "æ–‡ä»¶">C_Desktop.AeBak
+Dir /S /-C "C:\Users\%UserNa%\Documents\" | Find "æ–‡ä»¶">C_Documents.AeBak
+Dir /S /-C "C:\Users\%UserNa%\Downloads\" | Find "æ–‡ä»¶">C_Downloads.AeBak
 
 Echo.
-Echo £­ Í³¼ÆÎÄ¼þÊý¾Ý £­
+Echo ï¼ ç»Ÿè®¡æ–‡ä»¶æ•°æ® ï¼
 Set "filePath=C_Desktop.AeBak" 
-For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ¸öÎÄ¼þ *[0-9]* ×Ö½Ú"') do Set "ADesktop=%%A"
-Echo - ×ÀÃæ£º%ADesktop%
+For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ä¸ªæ–‡ä»¶ *[0-9]* å­—èŠ‚"') do Set "ADesktop=%%A"
+Echo - æ¡Œé¢ï¼š%ADesktop%
 Echo %ADesktop%>C_Desktop.AeBak
 
 Set "filePath=C_Downloads.AeBak" 
-For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ¸öÎÄ¼þ *[0-9]* ×Ö½Ú"') do Set "ADownloads=%%A"
-Echo - ÏÂÔØ£º%ADownloads%
+For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ä¸ªæ–‡ä»¶ *[0-9]* å­—èŠ‚"') do Set "ADownloads=%%A"
+Echo - ä¸‹è½½ï¼š%ADownloads%
 Echo %ADownloads%>C_Downloads.AeBak
 
 Set "filePath=C_Documents.AeBak" 
-For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ¸öÎÄ¼þ *[0-9]* ×Ö½Ú"') do Set "ADocuments=%%A"
-Echo - ÎÄµµ£º%ADocuments%
+For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ä¸ªæ–‡ä»¶ *[0-9]* å­—èŠ‚"') do Set "ADocuments=%%A"
+Echo - æ–‡æ¡£ï¼š%ADocuments%
 Echo %ADocuments%>C_Documents.AeBak
 
 Set "filePath=D_DirInfo.AeBak" 
-For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ¸öÄ¿Â¼ *[0-9]* ¿ÉÓÃ×Ö½Ú"') do Set "ADirInfo=%%A"
-Echo - ¿Õ¼ä£º%ADirInfo%
+For /f "tokens=*" %%A in ('type "%filePath%" ^| findstr /r /c:"[0-9]* ä¸ªç›®å½• *[0-9]* å¯ç”¨å­—èŠ‚"') do Set "ADirInfo=%%A"
+Echo - ç©ºé—´ï¼š%ADirInfo%
 Echo %ADirInfo%>D_DirInfo.AeBak
 
 Echo.
-Echo £­ Í³¼ÆÊý¾Ý×ÜÁ¿ £­
+Echo ï¼ ç»Ÿè®¡æ•°æ®æ€»é‡ ï¼
 Set input_file02=C_Desktop.AeBak
 For /f "tokens=3" %%a in (%input_file02%) do (
 	Set Desktop01=%%a
-	Echo - ×ÀÃæ£º!Desktop01!
+	Echo - æ¡Œé¢ï¼š!Desktop01!
 
 )
 	Del /q /a C_Desktop.AeBak
 Set input_file03=C_Downloads.AeBak
 For /f "tokens=3" %%a in (%input_file03%) do (
 	Set Downloads01=%%a
-	Echo - ÏÂÔØ£º!Downloads01!
+	Echo - ä¸‹è½½ï¼š!Downloads01!
 
 )
 	Del /q /a C_Downloads.AeBak
 Set input_file04=C_Documents.AeBak
 For /f "tokens=3" %%a in (%input_file04%) do (
 	Set Documents01=%%a
-	Echo - ÎÄµµ£º!Documents01!
+	Echo - æ–‡æ¡£ï¼š!Documents01!
 
 )
 	Del /q /a C_Documents.AeBak
 Set input_file01=D_DirInfo.AeBak
 For /f "tokens=3" %%a in (%input_file01%) do (
 	Set DirInfo01=%%a
-	Echo - ¿Õ¼ä£º!DirInfo01!
+	Echo - ç©ºé—´ï¼š!DirInfo01!
 
 )
 	Del /q /a D_DirInfo.AeBak
@@ -79,33 +80,33 @@ Echo.
 Set /a All_File = Desktop01 + Downloads01 + Documents01
 
 If !DirInfo01! LSS !All_File! (
-	Echo - ¿Õ¼ä²»×ã -
+	Echo - ç©ºé—´ä¸è¶³ -
 	Echo. 
-	Echo - ÎÄ¼þÊý¾Ý£º!All_File! 
-	Echo - ±¸·Ý¿Õ¼ä£º!DirInfo01! 
+	Echo - æ–‡ä»¶æ•°æ®ï¼š!All_File! 
+	Echo - å¤‡ä»½ç©ºé—´ï¼š!DirInfo01! 
 	Goto Space_DNo
 
 ) else (
-	Echo - ¿Õ¼ä×ã¹» -
+	Echo - ç©ºé—´è¶³å¤Ÿ -
 	Echo. 
-	Echo - ÎÄ¼þÊý¾Ý£º!All_File!  
-	Echo - ±¸·Ý¿Õ¼ä£º!DirInfo01! 
+	Echo - æ–‡ä»¶æ•°æ®ï¼š!All_File!  
+	Echo - å¤‡ä»½ç©ºé—´ï¼š!DirInfo01! 
 	Goto Bkup
 )
 
 Endlocal
 :Bkup
 	Echo.
-	Echo ++++++++++++++++++++Ñ¡Ôñ±¸·Ý+++++++++++++++++++
-	Echo +	- 1.±¸·Ý×ÀÃæÎÄ¼þ¼Ð[¿ì]
-	Echo +	- 2.±¸·ÝÏÂÔØÎÄ¼þ¼Ð[¿ì]
-	Echo +	- 3.±¸·ÝÎÄµµÎÄ¼þ¼Ð[Âý]
-	Echo +	- 4.±¸·Ý×ÀÃæ¡¢ÏÂÔØÎÄ¼þ¼Ð[¿ì]
-	Echo +	- 5.±¸·Ý×ÀÃæ¡¢ÏÂÔØ¡¢ÎÄµµÎÄ¼þ¼Ð[¼«Âý]
-	Echo +	- 6.ÍË³ö
+	Echo ++++++++++++++++++++é€‰æ‹©å¤‡ä»½+++++++++++++++++++
+	Echo +	- 1.å¤‡ä»½æ¡Œé¢æ–‡ä»¶å¤¹[å¿«]
+	Echo +	- 2.å¤‡ä»½ä¸‹è½½æ–‡ä»¶å¤¹[å¿«]
+	Echo +	- 3.å¤‡ä»½æ–‡æ¡£æ–‡ä»¶å¤¹[æ…¢]
+	Echo +	- 4.å¤‡ä»½æ¡Œé¢ã€ä¸‹è½½æ–‡ä»¶å¤¹[å¿«]
+	Echo +	- 5.å¤‡ä»½æ¡Œé¢ã€ä¸‹è½½ã€æ–‡æ¡£æ–‡ä»¶å¤¹[æžæ…¢]
+	Echo +	- 6.é€€å‡º
 	Echo ++++++++++++++++++++++++++++++++++++++++++++++
 	Echo.
-	@Set /p c=ÇëÊäÈëÐòºÅºó°´ÏÂ Enter ¼ÌÐø£º
+	@Set /p c=è¯·è¾“å…¥åºå·åŽæŒ‰ä¸‹ Enter ç»§ç»­ï¼š
 If %c%==1 (
 Goto Bkup_Desktop
 	) Else (
@@ -130,39 +131,39 @@ Goto Bkup_Error
 
 :Bkup_Desktop
 Cls
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\AJQ_BackupData\Desktop"
-Echo °´ÈÎÒâ¼üÍË³ö...
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\BackupData\Desktop"
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
 :Bkup_Download
 Cls
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\AJQ_BackupData\Downloads"
-Echo °´ÈÎÒâ¼üÍË³ö...
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\BackupData\Downloads"
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
 :Bkup_Document
 Cls
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Documents" "D:\AJQ_BackupData\Documents"
-Echo °´ÈÎÒâ¼üÍË³ö...
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Documents" "D:\BackupData\Documents"
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
 :Bkup_DekDoc
 Cls
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\AJQ_BackupData\Desktop"
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\AJQ_BackupData\Downloads"
-Echo °´ÈÎÒâ¼üÍË³ö...
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\BackupData\Desktop"
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\BackupData\Downloads"
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
 :Bkup_All
 Cls
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\AJQ_BackupData\Desktop"
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\AJQ_BackupData\Downloads"
-ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Documents" "D:\AJQ_BackupData\Documents"
-Echo °´ÈÎÒâ¼üÍË³ö...
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Desktop" "D:\BackupData\Desktop"
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Downloads" "D:\BackupData\Downloads"
+ROBOCOPY /E /B /NC /ETA /NDL /NFL /COPYALL "C:\Users\%UserNa%\Documents" "D:\BackupData\Documents"
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
@@ -171,14 +172,14 @@ Exit
 
 :Not_D
 Cls
-Echo ERROR£ºÎ´ÕÒµ½±¸·Ý´ÅÅÌ D£¬Çë¼ì²é´ÅÅÌ...
-Echo °´ÈÎÒâ¼üÍË³ö...
+Echo ERRORï¼šæœªæ‰¾åˆ°å¤‡ä»½ç£ç›˜ Dï¼Œè¯·æ£€æŸ¥ç£ç›˜...
+Echo æŒ‰ä»»æ„é”®é€€å‡º...
 Pause > Nul
 Exit
 
 :Space_DNo
 Cls
-Echo ERROR£º±¸·ÝÇøÓò¿Õ¼ä²»×ã...
-Echo ¼ÌÐøÇë°´ÈÎÒâ¼ü£¬È¡Ïûµã»÷ X ¹Ø±Õ´Ë³ÌÐò...
+Echo ERRORï¼šå¤‡ä»½åŒºåŸŸç©ºé—´ä¸è¶³...
+Echo ç»§ç»­è¯·æŒ‰ä»»æ„é”®ï¼Œå–æ¶ˆç‚¹å‡» X å…³é—­æ­¤ç¨‹åº...
 Pause > Nul
 Goto Bkup
